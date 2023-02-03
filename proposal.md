@@ -45,3 +45,6 @@ Project: **MUN Course Tool**
 | Recommended Course      | Suggest a course based on stream you following                                                                             | Client | Maybe   |
 | Course Warnings         | Display if the course will have conflicts such as duplicates, time slots, or missing prereqs before attempting to register | Client | Maybe   |
 | Show prereqs of course  | Display all required courses in self service                                                                               | Client | Maybe   |
+
+
+Figma Link: work on progress
