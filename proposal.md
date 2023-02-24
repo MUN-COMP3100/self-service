@@ -47,4 +47,4 @@ Project: **MUN Course Tool**
 | Show prereqs of course  | Display all required courses in self service                                                                               | Client | Maybe   |
 
 
-Figma Link: work on progress
+Figma Link: https://www.figma.com/file/fM6Wy1LZPjD1DXtjSfeSv6/COMP-3100-Design?node-id=0%3A1&t=oD8TPh3ZQEyxYgXO-1
