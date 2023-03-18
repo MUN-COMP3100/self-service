@@ -11,7 +11,6 @@ const courseSchema = new Schema({
   type: String,
   slot: String,
   schedule: {},
-  favorite: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }],
 })
 
 export default db.model("Course", courseSchema)
