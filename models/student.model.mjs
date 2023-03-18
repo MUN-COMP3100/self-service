@@ -7,7 +7,7 @@ const studentSchema = new Schema({
   email: String,
   username: String,
   password: String,
-  favorite: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }],
+  favorite: [{ type: Schema.Types.ObjectId, ref: "Course" }],
 })
 
 export default db.model("Student", studentSchema)

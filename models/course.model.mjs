@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose"
+import { Schema } from "mongoose"
 import db from "../db/index.mjs"
 
 const courseSchema = new Schema({
