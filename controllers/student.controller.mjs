@@ -15,10 +15,33 @@ import bcrypt from 'bcryptjs'
 
 // }
 
+// * Login
+export const login = async (req, res, next) => {
+  try {
+    const {username, password} = req.body
+
+    if (!username) return next(new AppError(401, 'Username is required'))
+    if (!password) return next(new AppError(401, 'Password is required'))
+
+    // * Find student with username in database
+    const student = await Student.findOne({ username })
+    if (!student) return next(new AppError(401, 'Username or password are incorrect.'))
+
+    // * Compare Password
+    const match = bcrypt.compareSync(password, student.password)
+    if (!match) return next(new AppError(401, 'Username or password are incorrect.'))
+
+    req.session.userId = student.id
+    res.sendStatus(200)
+
+  } catch (error) {
+    next(new AppError(500, error))
+  }
+}
+
 // * Create Student
 export const create = async (req, res, next) => {
   try {
-    console.log('hello')
     const {first_name, last_name, email, username, password} = req.body
 
     if (!email) return next(new AppError(401, 'Email is required'))

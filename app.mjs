@@ -1,12 +1,24 @@
 import express, { json, urlencoded } from 'express'
-import mongoose from 'mongoose'
+import MongoStore from 'connect-mongo'
+import sessions from 'express-session'
+import db from "./db/index.mjs"
 
 const app = express()
 
-import "./db/index.mjs"
+
 
 app.use(urlencoded({extended: true}))
 app.use(json())
+
+// * Auth Sessions
+app.use(sessions({
+  secret: 'VERYSECTRET',
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    clientPromise: Promise.resolve(db.getClient())
+  })
+}))
 
 
 // * ROUTES
