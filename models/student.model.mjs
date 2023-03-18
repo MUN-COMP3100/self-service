@@ -1,5 +1,5 @@
-import { model, Schema } from "mongoose";
-
+import { Schema } from "mongoose";
+import db from "../db/index.mjs"
 
 const studentSchema = new Schema({
   first_name: String,
@@ -9,4 +9,4 @@ const studentSchema = new Schema({
   password: String
 })
 
-export default model('Student', studentSchema)
+export default db.model('Student', studentSchema)

@@ -1,5 +1,5 @@
-import { model, Schema } from "mongoose";
-
+import { Schema } from "mongoose";
+import db from '../db/index.mjs'
 
 const courseSchema = new Schema({
   subject: String,
@@ -13,4 +13,4 @@ const courseSchema = new Schema({
   schedule: {}
 })
 
-export default model('Course', courseSchema)
+export default db.model('Course', courseSchema)

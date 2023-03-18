@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/MUN-COMP3100/project-hamooood25team#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.18.2",
     "mocha": "^10.2.0",
     "mongodb": "^5.1.0",
