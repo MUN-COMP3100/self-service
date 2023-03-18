@@ -6,9 +6,7 @@ const router = Router()
 import { create } from "../controllers/student.controller.mjs";
 
 // * All Routes Goes Here ( GET, POST ETC... )
-router.post('/', () => {
-  console.log('hello')
-})
+router.post('/', create)
 
 
 export default router;

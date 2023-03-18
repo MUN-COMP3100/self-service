@@ -1,5 +1,8 @@
 # Student Self Service
 
+- Mohammed Balfaqih 202051926
+- Ripudaman Singh 202054565
+
 ### Submission 2:
 - Project Structure
 	- We used `Routes, Controller, Middlewares`.
@@ -36,3 +39,38 @@
   - If password not correct we throw an error, if it is then we add a cookie of the new session, and everytime we authorize we check for the session
 
 
+## Setup Instructions
+
+- We are using `localhost:3000` as local URL
+- To setup, after you clone run this to install all dependencies
+```bash
+npm install
+```
+- We used 127.0.0.1:27017 for host and port of database 
+- selfservce for database
+- so connection URI is setup as
+```
+mongodb://127.0.0.1:27017/selfservice
+```
+- After installing dependencies, you will need to seed database with courses data
+- To do that run `npm run seed`
+- You will have exit manually using `CTRL + C`, we are having trouble making it exist by itself, but it should populate database
+- This will put all courses data in selfservice database in `Course` collection
+- To run
+
+```bash
+npm run start
+#or
+node app.js
+```
+
+## Testing Instructions
+- We are testing the CRUD operation for courses
+- Testing for students and auth are together because they are relevant
+- We tested if login is successful by logging in and then calling a protected route `/auth/me` which return logged on user data
+- we are testing creating new account with a random username
+- then create it again with same username to expect a unique error
+- to run the test run
+```bash
+npm run test
+```

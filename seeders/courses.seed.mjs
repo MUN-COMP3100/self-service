@@ -1,25 +1,22 @@
 import fs from "fs"
 import Course from "../models/course.model.mjs"
 import mongoose from "mongoose"
-const courses = []
+import db from '../db/index.mjs'
 
-mongoose.connect("mongodb://127.0.0.1:27017/selfservice").then(async () => {
-  const file = fs.readFileSync("./seeders/courses.json", "utf-8")
-  const data = await JSON.parse(file)
+const file = fs.readFileSync("./seeders/courses.json", "utf-8")
+const data = await JSON.parse(file)
 
-  data.forEach((course) => {
-    const newCourse = new Course({
-      subject: course.subject,
-      number: parseInt(course.number),
-      name: course.name,
-      section: parseInt(course.section),
-      crn: parseInt(course.crn),
-      slot: course.slot,
-      schedule: course.schedule,
-    })
-
-    newCourse.save()
+data.forEach((course) => {
+  const newCourse = new Course({
+    subject: course.subject,
+    number: parseInt(course.number),
+    name: course.name,
+    section: parseInt(course.section),
+    crn: parseInt(course.crn),
+    slot: course.slot,
+    schedule: course.schedule,
   })
-  console.log("Added all courses")
-  // mongoose.disconnect()
+
+  newCourse.save()
 })
+console.log("Added all courses, close with CTRL+C")

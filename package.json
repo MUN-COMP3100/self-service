@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "seed": "node ./seeders/courses.seed.mjs",
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
