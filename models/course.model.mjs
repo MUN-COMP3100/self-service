@@ -5,11 +5,11 @@ const courseSchema = new Schema({
   subject: String,
   number: Number,
   name: String,
-  section: Number,
+  section: String,
   crn: Number,
   room: String,
   type: String,
-  slot: Number,
+  slot: String,
   schedule: {}
 })
 
