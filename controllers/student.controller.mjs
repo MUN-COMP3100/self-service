@@ -7,9 +7,7 @@ export const me = async (req, res, next) => {
   try {
     
     const studentId = req.session.userId
-    console.log(studentId)
     const student = await Student.findOne({ _id: studentId })
-    console.log(student)
     if (!student) return next(new AppError(404, 'Student does not exist'))
    
     res.status(200).send(student)
@@ -68,6 +66,7 @@ export const create = async (req, res, next) => {
 
     res.status(200).send(saved)
   } catch (error) {
+    if (error.code === 11000) return next(new AppError(409, 'Username already exists'))
     next(new AppError(500, error))
   }
 }
