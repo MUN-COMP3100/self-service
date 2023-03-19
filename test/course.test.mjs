@@ -16,9 +16,11 @@ const instance = create({
 describe("Course test", function () {
   describe("Test Read operation", function () {
     it("GET /course/:id with valid id", async function () {
-      let id = "6416155d30b1a627c664f088"
-      let res = await instance.get(`/course/${id}`)
-      assert.equal(res.data.subject, "BIOC")
+      const courses = await Course.find()
+      const course = courses[0]
+
+      let res = await instance.get(`/course/${course.id}`)
+      assert.equal(res.data.subject, course.subject)
     })
   })
   describe("Test Create operation", function () {
@@ -33,7 +35,6 @@ describe("Course test", function () {
         schedule: [],
       })
       let res = await instance.post("/course", newObj)
-      console.log("res :>> ", res.data)
       let fetched = await instance.get(`/course/${res.data._id}`)
 
       assert.equal(fetched.data.number, 1515)
@@ -41,10 +42,13 @@ describe("Course test", function () {
   })
   describe("Test Update operation", function () {
     it("PUT /course:id with valid id", async function () {
-      let id = "6416155d30b1a627c664f088"
+      const courses = await Course.find()
+      const course = courses[0]
 
-      let res = await instance.put(`/course/${id}`, { slot: "69" })
-      const courseToUpdate = await Course.findOne({ _id: new ObjectId(id) })
+      let res = await instance.put(`/course/${course.id}`, { slot: "69" })
+      const courseToUpdate = await Course.findOne({
+        _id: new ObjectId(course.id),
+      })
       assert.equal(courseToUpdate.slot, res.data.slot)
     })
   })
