@@ -44,16 +44,19 @@ export const create = async (req, res, next) => {
 export const update = async (req, res, next) => {
   try {
     let { subject, number, name, section, crn, slot, schedule } = req.body
-    let newCourse = new Course({
-      subject,
-      number,
-      name,
-      section,
-      crn,
-      slot,
-      schedule,
-    })
-    let saved = newCourse.save()
+
+    const course = await Course.findOne({ _id: req.params.id })
+    if (!course) return next(new AppError(404, "Course not found"))
+
+    if (subject) course.subject = subject
+    if (number) course.number = number
+    if (name) course.name = name
+    if (section) course.section = section
+    if (crn) course.crn = crn
+    if (slot) course.slot = slot
+    if (schedule) course.schedule = schedule
+
+    let saved = await course.save()
     res.status(200).send(saved)
   } catch (error) {
     next(new AppError(500, error))
