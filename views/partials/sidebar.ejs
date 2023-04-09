@@ -1,0 +1,54 @@
+<% 
+let active = "p-2 rounded-xl border-red-300 border-[0.5px] bg-red-50 text-red-400 font-semibold" 
+
+let inActive = "p-2 flex items-center gap-2 text-gray-500"
+%>
+
+
+<aside id="sidebar" class="min-w-[200px] flex flex-col items-center py-2 text-sm transition-all duration-200">
+  <img class="w-32" src="/imgs/mun.jpg" alt="">
+  <ul class=" py-3 w-full px-3 flex flex-col gap-3 no-underline">
+    <li class="<%= page_name === 'index' ? active : inActive %>">
+      <a href="/" class="flex items-center gap-2">
+        <i data-feather="home"></i>
+        <span> Home </span>
+      </a>
+    </li>
+    <li class="<%= page_name === 'courses' ? active : inActive %>">
+      <a href="/courses" class="flex items-center gap-2">
+        <i data-feather="book"></i>
+        <span> View Courses </span>
+      </a>
+    </li>
+    <li class="<%= page_name === 'register_courses' ? active : inActive %>">
+      <a href="/register_courses" class="flex items-center gap-2">
+        <i data-feather="edit"></i>
+        <span> Register Courses </span>
+      </a>
+    </li>
+    <li class="<%= page_name === 'bulk' ? active : inActive %>">
+      <a href="/bulk" class="flex items-center gap-2 text-gray-500">
+        <i data-feather="layers"></i>
+        <span> Bulk Register Courses </span>
+      </a>
+    </li>
+    <li class="<%= page_name === 'favorite' ? active : inActive %>">
+      <a href="/favorite" class="flex items-center gap-2 text-gray-500">
+        <i data-feather="star"></i>
+        <span> Favorite Courses </span>
+      </a>
+    </li>
+    <li class="<%= page_name === 'timetable' ? active : inActive %>">
+      <a href="/timetable" class="flex items-center gap-2 text-gray-500">
+        <i data-feather="calendar"></i>
+        <span> Time Table </span>
+      </a>
+    </li>
+    <li class="<%= page_name === 'calculator' ? active : inActive %>">
+      <a href="/calculator" class="flex items-center gap-2 text-gray-500">
+        <i data-feather="plus"></i>
+        <span> Grade Calculator </span>
+      </a>
+    </li>
+  </ul>
+</aside>

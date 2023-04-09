@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<%- include('../partials/head') %>
+	</head>
+	<body>
+    <% 
+      const optionsSet = new Set()
+      courses.forEach(course => {
+        optionsSet.add(course.subject)
+      });
+      const sortedOptions = [...optionsSet].sort()
+
+       %>
+		<div class="flex min-h-screen">
+			<%- include('../partials/sidebar.ejs', { page_name: "courses" }) %>
+
+			<main class="flex flex-col bg-slate-100 flex-1">
+				<%- include('../partials/navbar.ejs') %>
+
+				<div class="px-5 mt-5">
+					<h1 class="text-xl">Courses</h1>
+          <div class="flex gap-1">
+            <i data-feather="filter" width="20px"></i>
+            <select id="filter" class=" p-1 rounded-lg min-w-[200px]">
+              <option value="all">All</option>
+              <% sortedOptions.forEach(option => { %>
+                
+               <option><%= option %></option>
+              <% }) %>
+            </select>
+          </div>
+					<ul id="courses" class="flex flex-col gap-3 mt-3">
+						<% courses.forEach(course => { %>
+
+						<li
+							class="h-20 bg-white p-3 rounded-xl flex justify-between"
+              data-subject="<%= course.subject %>"
+						>
+							<div>
+								<span class="flex gap-1">
+									<i data-feather="book"></i>
+									<%= course.subject %> | <%= course.number %>
+								</span>
+								<span class="text-sm text-gray-500 mt-4">
+									Name
+								</span>
+							</div>
+							<div class="flex flex-col items-end gap-1">
+								<div class="flex gap-2">
+									<i data-feather="users" width="20px"></i>
+									<span><%= course.slot %></span>
+								</div>
+								<button
+									class="bg-red-900 text-white p-1 text-sm rounded-lg"
+								>
+									View Schedule
+								</button>
+							</div>
+						</li>
+						<% }) %>
+					</ul>
+				</div>
+			</main>
+		</div>
+
+		<%- include('../partials/scripts.ejs') %>
+		<script src="/js/view_courses.js"></script>
+	</body>
+</html>

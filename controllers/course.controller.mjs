@@ -4,8 +4,9 @@ import Course from "../models/course.model.mjs"
 // * Get Courses
 export const getAll = async (req, res, next) => {
   try {
-    let objs = await Course.find({})
-    res.status(200).send(objs)
+    let courses = await Course.find({}).sort({subject:1})
+
+    res.render('pages/courses', { courses })
   } catch (error) {
     next(new AppError(500, error))
   }

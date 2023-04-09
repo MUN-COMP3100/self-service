@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+</head>
+<body>
+
+  <div class="flex min-h-screen">
+    <%- include('../partials/sidebar.ejs', { page_name: "index" }) %>
+    
+    <main class="flex flex-col bg-slate-100 flex-1">
+      <%- include('../partials/navbar.ejs') %>
+      
+      <div class=" px-5 mt-5">
+        <section>
+          <h1 class="text-xl">Dashboard</h1>
+          <ul class="grid grid-cols-3 mt-3 gap-3">
+            <li class=" h-24 text-sm p-2 rounded-xl bg-white flex flex-col justify-around">
+              <span class="text-3xl ">3 Courses</span>
+              <span class="text-gray-500"> Favorite Courses</span>
+            </li>
+            <li class=" h-24 text-sm p-2 rounded-xl bg-white flex flex-col justify-around">
+              <span class="text-3xl ">3 Courses</span>
+              <span class="text-gray-500"> Registered Courses</span>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </main>
+  </div>
+  
+  <%- include('../partials/scripts.ejs') %>
+</body>
+</html>
