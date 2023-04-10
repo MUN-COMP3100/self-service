@@ -2,38 +2,41 @@ import { Router } from "express"
 
 const router = Router()
 
+import authMiddleware from "../middlewares/auth.mjs";
+import guestMiddleware from "../middlewares/guest.mjs";
+
 
 // * Public Routes ( No Need to Login )
-router.get('/login', (req, res, next) => {
+router.get('/login', guestMiddleware, (req, res, next) => {
   res.render('pages/login')
 })
 
-router.get('/register', (req, res, next) => {
-  res.render('login')
+router.get('/register', guestMiddleware, (req, res, next) => {
+  res.render('pages/register')
 })
 
 // * Protected Routes ( Must Login )
-router.get('/', (req, res) => {
+router.get('/', authMiddleware, (req, res) => {
   res.render('pages/index')
 })
 
-router.get('/register_courses', (req, res) => {
+router.get('/register_courses', authMiddleware, (req, res) => {
   res.render('pages/register_courses')
 })
 
-router.get('/bulk', (req, res) => {
+router.get('/bulk', authMiddleware, (req, res) => {
   res.render('pages/bulk')
 })
 
-router.get('/favorite', (req, res) => {
+router.get('/favorite', authMiddleware, (req, res) => {
   res.render('pages/favorite')
 })
 
-router.get('/timetable', (req, res) => {
+router.get('/timetable', authMiddleware, (req, res) => {
   res.render('pages/timetable')
 })
 
-router.get('/calculator', (req, res) => {
+router.get('/calculator', authMiddleware, (req, res) => {
   res.render('pages/calculator')
 })
 

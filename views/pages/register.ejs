@@ -10,13 +10,42 @@
 			<div
 				class="w-[500px] min-h-[400px] bg-white rounded-xl text-xl relative flex flex-col justify-between"
 			>
-				<form id="loginForm" class="p-3">
-					<h1 class="text-3xl text-center">Login to Self Service</h1>
-					<div
+				<form id="registerForm" class="p-3">
+					<h1 class="text-3xl text-center">Register to Self Service</h1>
+
+          <div
 						id="error"
 						class="text-red-400 mt-2 border-red-200 text-center border-[1px] p-2 rounded-xl hidden"
 					>
-						Incorrect Username or Password
+						Username Taken
+					</div>
+          <div class="mt-2 flex flex-col">
+						<label for="username">First Name</label>
+						<input
+							name="first_name"
+							id="first_name"
+							class="bg-slate-100 rounded-md p-1 border-[1px] border-red-900"
+							type="text"
+						/>
+					</div>
+          <div class="mt-2 flex flex-col">
+						<label for="username">Last Name</label>
+						<input
+							name="last_name"
+							id="last_name"
+							class="bg-slate-100 rounded-md p-1 border-[1px] border-red-900"
+							type="text"
+						/>
+					</div>
+          <div class="mt-2 flex flex-col">
+						<label for="email">Email</label>
+						<input
+							name="email"
+							id="email"
+              type="email"
+							class="bg-slate-100 rounded-md p-1 border-[1px] border-red-900"
+							type="text"
+						/>
 					</div>
 					<div class="mt-2 flex flex-col">
 						<label for="username">Username</label>
@@ -40,17 +69,17 @@
 					<button
 						class="bg-red-900 w-full mt-3 text-white rounded-md p-1"
 					>
-						Login
+						Create Account
 					</button>
 				</form>
 				<div class="text-center bg-red-50 p-2 mt-3">
-					Don't have an account?
-					<a href="/register" class="text-red-900">Register</a>
+					Already have an account?
+					<a href="/login" class="text-red-900">Login</a>
 				</div>
 			</div>
 		</main>
 
 		<%- include('../partials/scripts.ejs') %>
-		<script src="/js/login.js"></script>
+		<script src="/js/register.js"></script>
 	</body>
 </html>

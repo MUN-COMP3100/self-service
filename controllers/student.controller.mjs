@@ -34,11 +34,18 @@ export const login = async (req, res, next) => {
     if (!match) return next(new AppError(401, 'Username or password are incorrect.'))
 
     req.session.userId = student.id
+
     res.sendStatus(200)
 
   } catch (error) {
     next(new AppError(500, error))
   }
+}
+
+// * Logout
+export const logout = async (req, res, next) => {
+  req.session.destroy()
+  res.sendStatus(200)
 }
 
 // * Create Student
