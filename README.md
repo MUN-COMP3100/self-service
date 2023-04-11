@@ -3,45 +3,52 @@
 - Mohammed Balfaqih 202051926
 - Ripudaman Singh 202054565
 
-Submission: Saturday, 18 March, 2023
+Submission: Saturday, 20 March, 2023
 
-### Submission 2:
-- Project Structure
-	- We used `Routes, Controller, Middlewares`.
-	- We defined our routes in `./routes`, it's where we write the GET/POST/UPDATE/DELETE for every feature of our project.
-	- Querying the database happens in `./controllers`, it's a where all the functions between the app and database happen. We also do validation, encrypting, and error checking there.
-	- we define our middlewares in `./middlewares`, we will use middlewares to check for permissions, authorization, and authentications.
-- Mongodb Connection ( Feature 1)
-	- We used mongoose to easily create relationship between tables and easier validation.
-	- The connection is initialised  in `./db/index.mjs`, where we create a Mongodb connection then return the connection to be used.
-	- Models and defined Schemas are located in `./models`, it's where we defined our data types and relationships.
-- Register Account ( Feature 2 )
-	- When a student register, we check if username exists first.
-	- When creating, we encrypt the password for security using bcryptjs.
-	- Then we save everything with the hashed password in database
-- Student Controller ( Feature 3 )
-	- We defined student schema with student details and username and password.
-	- username is unique
-	- The operation for student is only create, update.
-	- We don't want to have get all or get by id until we implement admin feature.
-- Course Controller (Feature 4)
-  - We defined course schema with details.
-  - We will have get all courses and course by id avaialable for public
-  - Create, Update Delete courses will only be for Admin
-- Favorite Course (Feature 5)
-  - Every student will have a list of favorite courses.
-  - We added additional schema definition for student which is a list of object ids of courses.
-  - We made sure the id is for courses using mongoose relationship and references.
-- Authentication (Feature 6)
-  - For authentication we are using `mongo-connect` and `express-sessions`
-  - Code for login is in `./controllers/student.controller.mjs`
-  - When a user calls for login we get the username and password
-  - We check if username exist in database, if not we say username or password isn't correct for security
-  - If it does exist, we compare the hash in database with given password
-  - If password not correct we throw an error, if it is then we add a cookie of the new session, and everytime we authorize we check for the session
+# Submission 3:
 
+We implemented 7 core frontend/client side features. We made 5 pages to contain all of the features.
 
-## Setup Instructions
+# Features:
+1. Statistics
+   - In the Home Page student can see how many registered and favorite courses there are
+2. View Courses
+   - Student can see all offered courses
+   - Student can filter course by subject
+3. Register Course
+   - Students can register courses from /courses page
+   - If student already registered to course it will show an error message
+   - If student has a course with a time conflict it will show an error message
+   - Student can see the schedule of the course
+4. Bulk Register Course
+   - This will help the student if they already got all the CRNs of the course they need
+   - Student will put all the CRNS for courses and it will register to all of them
+   - It will show an error incase there is any conflicts or similar courses registered
+5. Login/Logout
+   - A login page where it will authenticate the user to access dashboard
+   - Selfservice routes are middleware protected, only logged on users can see them and interact with them
+   - Login page is also route protected, only not logged in users can see them
+   - Login will add a cookie with session id 
+   - before every api call we have access to the user who did the call using middlewares
+6. Register User
+   - Students can register their user to selfservice
+   - Usernames are unique so if they choose one already taken it will give them an error message
+7. View Registered/Favorite Courses and Drop them
+   - In the home page students can view their registered courses
+   - There is a delete button where it will drop the course for the student
+8. Favorite Course
+   - Students can put a course as a favorite so they can watch them
+   - They can favorite the course using the star in Courses page
+   - This is for an unimplemented feature where students will get push notification/email if the course opens up or there is an empty seat.
+
+# Pages
+- Login Page (only guests): /login
+- Register Page (only guests): /register
+- Home Page (auth required): /
+- Courses Page (auth required): /courses
+- Bulk Register (auth required): /bulk
+
+# Setup Instructions
 
 - We are using `localhost:3000` as local URL
 - To setup, after you clone run this to install all dependencies
