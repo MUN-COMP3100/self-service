@@ -10,6 +10,7 @@ Submission: Saturday, 13 March, 2023
 We implemented 7 core frontend/client side features. We made 5 pages to contain all of the features.
 
 # Features:
+
 1. Statistics
    - In the Home Page student can see how many registered and favorite courses there are
 2. View Courses
@@ -22,13 +23,13 @@ We implemented 7 core frontend/client side features. We made 5 pages to contain 
    - Student can see the schedule of the course
 4. Bulk Register Course
    - This will help the student if they already got all the CRNs of the course they need
-   - Student will put all the CRNS for courses and it will register to all of them
+   - Student will put all the CRNs for courses and it will register to all of them
    - It will show an error incase there is any conflicts or similar courses registered
 5. Login/Logout
    - A login page where it will authenticate the user to access dashboard
    - Selfservice routes are middleware protected, only logged on users can see them and interact with them
    - Login page is also route protected, only not logged in users can see them
-   - Login will add a cookie with session id 
+   - Login will add a cookie with session id
    - before every api call we have access to the user who did the call using middlewares
 6. Register User
    - Students can register their user to selfservice
@@ -42,6 +43,7 @@ We implemented 7 core frontend/client side features. We made 5 pages to contain 
    - This is for an unimplemented feature where students will get push notification/email if the course opens up or there is an empty seat.
 
 # Pages
+
 - Login Page (only guests): /login
 - Register Page (only guests): /register
 - Home Page (auth required): /
@@ -52,15 +54,19 @@ We implemented 7 core frontend/client side features. We made 5 pages to contain 
 
 - We are using `localhost:3000` as local URL
 - To setup, after you clone run this to install all dependencies
+
 ```bash
 npm install
 ```
-- We used 127.0.0.1:27017 for host and port of database 
+
+- We used 127.0.0.1:27017 for host and port of database
 - selfservce for database
 - so connection URI is setup as
+
 ```
 mongodb://127.0.0.1:27017/selfservice
 ```
+
 - After installing dependencies, you will need to seed database with courses data
 - To do that run `npm run seed`
 - You will have exit manually using `CTRL + C`, we are having trouble making it exist by itself, but it should populate database
@@ -70,16 +76,18 @@ mongodb://127.0.0.1:27017/selfservice
 ```bash
 npm run start
 #or
-node app.js
+node app.mjs
 ```
 
 ## Testing Instructions
+
 - We are testing the CRUD operation for courses
 - Testing for students and auth are together because they are relevant
 - We tested if login is successful by logging in and then calling a protected route `/auth/me` which return logged on user data
 - we are testing creating new account with a random username
 - then create it again with same username to expect a unique error
-- to run the test run
+- to run the tests:
+
 ```bash
 npm run test
 ```
