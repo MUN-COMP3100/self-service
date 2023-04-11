@@ -88,12 +88,41 @@ export const register = async (req, res, next) => {
       _id: req.params.id,
     })
     if (!course) return next(new AppError(404, "Course not found"))
+    for (const registered of student.courses) {
+      if (conflictsWith(course, registered)) {
+        return next(
+          new AppError(
+            409,
+            `${course.subject}${course.number} conflicts with ${registered.subject}${registered.number}`
+          )
+        )
+      }
+    }
     student.courses.push(course.id)
     const savedStudent = await student.save()
     res.status(200).send(savedStudent)
   } catch (error) {
     next(new AppError(500, error))
   }
+}
+
+const conflictsWith = (first, second) => {
+  let firstSchedule = first.schedule
+  let secondSchedule = second.schedule
+
+  for (let day in firstSchedule) {
+    if (day in secondSchedule) {
+      let endsFirst =
+        firstSchedule[day].end < secondSchedule[day].end
+          ? firstSchedule
+          : secondSchedule
+      let endsLast = endsFirst == firstSchedule ? secondSchedule : firstSchedule
+      if (endsFirst[day].end >= endsLast[day].start) {
+        return true
+      }
+    }
+  }
+  return false
 }
 
 // * Bulk register courses
