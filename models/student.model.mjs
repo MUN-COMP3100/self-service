@@ -7,7 +7,8 @@ const studentSchema = new Schema({
   email: String,
   username: String,
   password: String,
-  favorite: [{ type: Schema.Types.ObjectId, ref: "Course" }],
+  favorites: [{ type: Schema.Types.ObjectId, ref: "Course" }],
+  courses: [{ type: Schema.Types.ObjectId, ref: "Course" }],
 })
 
 export default db.model("Student", studentSchema)

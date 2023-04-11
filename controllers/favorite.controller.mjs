@@ -18,7 +18,7 @@ export const add = async (req, res, next) => {
 
     if (!course) return next(new AppError(404, "Course not found"))
 
-    student.favorite.push(course.id)
+    student.favorites.push(course.id)
 
     const savedStudent = await student.save()
 
@@ -37,7 +37,7 @@ export const remove = async (req, res, next) => {
 
     if (!student) return next(new AppError(404, "Student not found"))
 
-    student.favorite = student.favorite.filter((x) => x !== req.params.id)
+    student.favorites = student.favorite.filter((x) => x !== req.params.id)
     const savedStudent = await student.save()
 
     res.status(200).send(savedStudent)
