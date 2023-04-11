@@ -17,14 +17,31 @@
           <h1 class="text-xl">Dashboard</h1>
           <ul class="grid grid-cols-3 mt-3 gap-3">
             <li class=" h-24 text-sm p-2 rounded-xl bg-white flex flex-col justify-around">
-              <span class="text-3xl ">3 Courses</span>
+              <span class="text-3xl " id="favoriteCount">3 Courses</span>
               <span class="text-gray-500"> Favorite Courses</span>
             </li>
             <li class=" h-24 text-sm p-2 rounded-xl bg-white flex flex-col justify-around">
-              <span class="text-3xl ">3 Courses</span>
+              <span class="text-3xl" id="courseCount">3 Courses</span>
               <span class="text-gray-500"> Registered Courses</span>
             </li>
           </ul>
+        </section>
+      </div>
+
+      <div class=" px-5 mt-5">
+        <section>
+          <h1 class="text-xl">Registered Courses</h1>
+          <div class="mt-3">
+            <div id="success" class="text-center border-[1px] border-green-600 text-green-800 p-2 rounded-xl hidden">
+              Course Deleted Successfully
+            </div>
+            <div id="fail" class="text-center border-[1px] border-red-600 text-red-800 p-2 rounded-xl hidden">
+              Failed to Delete Course
+            </div>
+          </div>
+          <ul id="courses" class="flex flex-col gap-3 mt-3">
+					</ul>
+
         </section>
       </div>
     </main>

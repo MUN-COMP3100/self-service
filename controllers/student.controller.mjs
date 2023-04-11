@@ -2,12 +2,13 @@ import AppError from "../errors/AppError.mjs"
 import Student from "../models/student.model.mjs"
 import Course from "../models/course.model.mjs"
 import bcrypt from "bcryptjs"
+import { ObjectId } from "mongodb"
 
 // * Get Logged On Student
 export const me = async (req, res, next) => {
   try {
     const studentId = req.session.userId
-    const student = await Student.findOne({ _id: studentId })
+    const student = await Student.findOne({ _id: studentId }).populate('courses')
     if (!student) return next(new AppError(404, "Student does not exist"))
 
     res.status(200).send(student)
@@ -79,6 +80,17 @@ export const create = async (req, res, next) => {
   }
 }
 
+// * View Registered Courses
+// export const registeredCourses = async (req, res, next) => {
+//   try {
+//     const student = await Student.findOne({ _id: req.session.userId })
+//     if (!student) return next(new AppError(404, "Student does not exist"))
+
+//   } catch (error) {
+    
+//   }
+// }
+
 // * Register course
 export const register = async (req, res, next) => {
   try {
@@ -114,16 +126,20 @@ export const bulk = async (req, res, next) => {
   }
 }
 
+// * Drop Course
 export const drop = async (req, res, next) => {
   try {
+    console.log("drop")
     const student = await Student.findOne({ _id: req.session.userId })
     if (!student) return next(new AppError(404, "Student does not exist"))
     const course = await Course.findOne({
       _id: req.params.id,
     })
     if (!course) return next(new AppError(404, "Course not found"))
-    student.courses = student.courses.filter((x) => x._id !== req.params.id)
+    student.courses = student.courses.filter((x) => !x._id.equals(req.params.id))
+    console.log(student.courses)
     const savedStudent = await student.save()
+    
     res.status(200).send(savedStudent)
   } catch (error) {
     next(new AppError(500, error))
@@ -134,6 +150,7 @@ export const drop = async (req, res, next) => {
 // export const update = async (req, res, next) => {
 
 // }
+
 // * Delete Student
 // export const remove = async (req, res, next) => {
 

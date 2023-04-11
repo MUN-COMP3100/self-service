@@ -30,6 +30,15 @@
               <% }) %>
             </select>
           </div>
+
+          <div class="mt-3">
+            <div id="success" class="text-center border-[1px] border-green-600 text-green-800 p-2 rounded-xl hidden">
+              Course Registered Successfully
+            </div>
+            <div id="fail" class="text-center border-[1px] border-red-600 text-red-800 p-2 rounded-xl hidden">
+              Failed to Register Course
+            </div>
+          </div>
 					<ul id="courses" class="flex flex-col gap-3 mt-3">
 						<% courses.forEach(course => { %>
 
@@ -43,18 +52,22 @@
 									<%= course.subject %> | <%= course.number %>
 								</span>
 								<span class="text-sm text-gray-500 mt-4">
-									Name
+									<%= course.name %> |
+								</span>
+                <span class="text-sm text-gray-500 mt-4">
+									<a class=" text-red-300" href="">View Schedule</a>
 								</span>
 							</div>
 							<div class="flex flex-col items-end gap-1">
 								<div class="flex gap-2">
 									<i data-feather="users" width="20px"></i>
-									<span><%= course.slot %></span>
+									<span></span>
 								</div>
 								<button
-									class="bg-red-900 text-white p-1 text-sm rounded-lg"
+                  data-course="<%= course.id %>"
+									class="bg-red-900 text-white p-1 text-sm rounded-lg registerBtn"
 								>
-									View Schedule
+									Register
 								</button>
 							</div>
 						</li>
@@ -66,5 +79,6 @@
 
 		<%- include('../partials/scripts.ejs') %>
 		<script src="/js/view_courses.js"></script>
+    <script src="/js/registerCourse.js"></script>
 	</body>
 </html>

@@ -20,35 +20,12 @@ let inActive = "p-2 flex items-center gap-2 text-gray-500"
         <span> View Courses </span>
       </a>
     </li>
-    <li class="<%= page_name === 'register_courses' ? active : inActive %>">
-      <a href="/register_courses" class="flex items-center gap-2">
-        <i data-feather="edit"></i>
-        <span> Register Courses </span>
-      </a>
-    </li>
     <li class="<%= page_name === 'bulk' ? active : inActive %>">
       <a href="/bulk" class="flex items-center gap-2 text-gray-500">
         <i data-feather="layers"></i>
         <span> Bulk Register Courses </span>
       </a>
     </li>
-    <li class="<%= page_name === 'favorite' ? active : inActive %>">
-      <a href="/favorite" class="flex items-center gap-2 text-gray-500">
-        <i data-feather="star"></i>
-        <span> Favorite Courses </span>
-      </a>
-    </li>
-    <li class="<%= page_name === 'timetable' ? active : inActive %>">
-      <a href="/timetable" class="flex items-center gap-2 text-gray-500">
-        <i data-feather="calendar"></i>
-        <span> Time Table </span>
-      </a>
-    </li>
-    <li class="<%= page_name === 'calculator' ? active : inActive %>">
-      <a href="/calculator" class="flex items-center gap-2 text-gray-500">
-        <i data-feather="plus"></i>
-        <span> Grade Calculator </span>
-      </a>
-    </li>
+
   </ul>
 </aside>
