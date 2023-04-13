@@ -58,7 +58,7 @@ router.use("/api/favorite", favorite)
 
 // * Error Handler
 router.use(function (err, req, res, next) {
-  console.log(err)
+  
   res.status(err.status || 500).send({
     error: true,
     messages: err.messages || ["Internal Server Error"],

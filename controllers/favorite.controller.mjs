@@ -37,7 +37,7 @@ export const remove = async (req, res, next) => {
 
     if (!student) return next(new AppError(404, "Student not found"))
 
-    student.favorites = student.favorite.filter((x) => x !== req.params.id)
+    student.favorites = student.favorites.filter((x) => !x._id.equals(req.params.id))
     const savedStudent = await student.save()
 
     res.status(200).send(savedStudent)

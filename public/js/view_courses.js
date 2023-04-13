@@ -6,7 +6,7 @@ selectSubject.addEventListener('change', e => {
   const selected = selectSubject.value
 
   const courses = coursesList.children
-  console.log(selected)
+  
 
   for (let i = 0; i < courses.length; i++) {
     const course = courses[i];

@@ -4,14 +4,10 @@
 		<%- include('../partials/head') %>
 	</head>
 	<body>
-    <% 
-      const optionsSet = new Set()
-      courses.forEach(course => {
-        optionsSet.add(course.subject)
-      });
-      const sortedOptions = [...optionsSet].sort()
-
-       %>
+		<% const days = { "M": "Monday", "T": "Tuesday", "W": "Wednesday", "R":
+		"Thursday", "F": "Friday", } %> <% const optionsSet = new Set()
+		courses.forEach(course => { optionsSet.add(course.subject) }); const
+		sortedOptions = [...optionsSet].sort() %>
 		<div class="flex min-h-screen">
 			<%- include('../partials/sidebar.ejs', { page_name: "courses" }) %>
 
@@ -20,31 +16,70 @@
 
 				<div class="px-5 mt-5">
 					<h1 class="text-xl">Courses</h1>
-          <div class="flex gap-1">
-            <i data-feather="filter" width="20px"></i>
-            <select id="filter" class=" p-1 rounded-lg min-w-[200px]">
-              <option value="all">All</option>
-              <% sortedOptions.forEach(option => { %>
-                
-               <option><%= option %></option>
-              <% }) %>
-            </select>
-          </div>
+					<div class="flex gap-1">
+						<i data-feather="filter" width="20px"></i>
+						<select
+							id="filter"
+							class="p-1 rounded-lg min-w-[200px]"
+						>
+							<option value="all">All</option>
+							<% sortedOptions.forEach(option => { %>
 
-          <div class="mt-3">
-            <div id="success" class="text-center border-[1px] border-green-600 text-green-800 p-2 rounded-xl hidden">
-              Course Registered Successfully
-            </div>
-            <div id="fail" class="text-center border-[1px] border-red-600 text-red-800 p-2 rounded-xl hidden">
-              Failed to Register Course
-            </div>
-          </div>
+							<option><%= option %></option>
+							<% }) %>
+						</select>
+					</div>
+
+					<div class="mt-3">
+						<div
+							id="success"
+							class="text-center border-[1px] border-green-600 text-green-800 p-2 rounded-xl hidden"
+						>
+							Course Registered Successfully
+						</div>
+						<div
+							id="fail"
+							class="text-center border-[1px] border-red-600 text-red-800 p-2 rounded-xl hidden"
+						>
+							Failed to Register Course
+						</div>
+					</div>
+
 					<ul id="courses" class="flex flex-col gap-3 mt-3">
 						<% courses.forEach(course => { %>
+						<div
+							id="modal-<%= course.id %>"
+							class="fixed w-[600px] h-[500px] bg-slate-50 hidden shadow-2xl"
+						>
+							<div
+								class="bg-white h-12 flex items-center justify-between px-2"
+							>
+								<h1>
+									<%= course.subject %> <%= course.number %>
+									Schedule
+								</h1>
+								<button class="closeBtn">
+									<i
+										data-feather="x"
+										class="pointer-events-none"
+									></i>
+								</button>
+							</div>
 
+							<ul class="px-2 mt-2 flex flex-col gap-2">
+								<% Object.keys(course.schedule).forEach(key => {
+								%>
+								<li class="bg-white rounded-lg p-3">
+									<%= days[key] %>: <%=
+									course.schedule[key].start %> - <%=
+									course.schedule[key].end %>
+								</li>
+								<% }) %>
+							</ul>
+						</div>
 						<li
 							class="h-20 bg-white p-3 rounded-xl flex justify-between"
-              data-subject="<%= course.subject %>"
+							data-subject="<%= course.subject %>"
 						>
 							<div>
 								<span class="flex gap-1">
@@ -55,16 +90,29 @@
 									<%= course.name %> |
 								</span>
                 <span class="text-sm text-gray-500 mt-4">
-									<a class=" text-red-300" href="">View Schedule</a>
+									SEC: <%= course.section %> |
+								</span>
+                <span class="text-sm text-gray-500 mt-4">
+									CRN: <%= course.crn %> |
+								</span>
+								<span class="text-sm text-gray-500 mt-4">
+									<button
+										data-course="<%= course.id %>"
+										class="text-red-300 scheduleBtn"
+										href=""
+									>
+										View Schedule
+									</button>
 								</span>
 							</div>
 							<div class="flex flex-col items-end gap-1">
 								<div class="flex gap-2">
-									<i data-feather="users" width="20px"></i>
-									<span></span>
+									
+									<button data-course="<%= course.id %>" class="favoriteBtn"><i data-feather="star" class=" text-yellow-600 pointer-events-none" width="20px"></i></button>
+
 								</div>
 								<button
-                  data-course="<%= course.id %>"
+									data-course="<%= course.id %>"
 									class="bg-red-900 text-white p-1 text-sm rounded-lg registerBtn"
 								>
 									Register
@@ -79,6 +127,6 @@
 
 		<%- include('../partials/scripts.ejs') %>
 		<script src="/js/view_courses.js"></script>
-    <script src="/js/registerCourse.js"></script>
+		<script src="/js/registerCourse.js"></script>
 	</body>
 </html>

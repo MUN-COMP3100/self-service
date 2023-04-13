@@ -8,7 +8,7 @@ import { ObjectId } from "mongodb"
 export const me = async (req, res, next) => {
   try {
     const studentId = req.session.userId
-    const student = await Student.findOne({ _id: studentId }).populate('courses')
+    const student = await Student.findOne({ _id: studentId }).populate('courses').populate('favorites')
     if (!student) return next(new AppError(404, "Student does not exist"))
 
     res.status(200).send(student)
@@ -101,11 +101,14 @@ export const register = async (req, res, next) => {
     })
     if (!course) return next(new AppError(404, "Course not found"))
     for (const registered of student.courses) {
-      if (conflictsWith(course, registered)) {
+      const secondCourse = await Course.findOne({ _id: registered })
+      const hasConflict = conflictsWith(course, secondCourse)
+      
+      if (hasConflict) {
         return next(
           new AppError(
             409,
-            `${course.subject}${course.number} conflicts with ${registered.subject}${registered.number}`
+            `${course.subject}${course.number} conflicts with ${secondCourse.subject}${secondCourse.number}`
           )
         )
       }
@@ -121,7 +124,6 @@ export const register = async (req, res, next) => {
 const conflictsWith = (first, second) => {
   let firstSchedule = first.schedule
   let secondSchedule = second.schedule
-
   for (let day in firstSchedule) {
     if (day in secondSchedule) {
       let endsFirst =
@@ -158,7 +160,7 @@ export const bulk = async (req, res, next) => {
 // * Drop Course
 export const drop = async (req, res, next) => {
   try {
-    console.log("drop")
+    
     const student = await Student.findOne({ _id: req.session.userId })
     if (!student) return next(new AppError(404, "Student does not exist"))
     const course = await Course.findOne({
@@ -166,7 +168,7 @@ export const drop = async (req, res, next) => {
     })
     if (!course) return next(new AppError(404, "Course not found"))
     student.courses = student.courses.filter((x) => !x._id.equals(req.params.id))
-    console.log(student.courses)
+    
     const savedStudent = await student.save()
     
     res.status(200).send(savedStudent)

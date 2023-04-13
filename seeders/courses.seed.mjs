@@ -19,4 +19,4 @@ data.forEach((course) => {
 
   newCourse.save()
 })
-console.log("Added all courses, close with CTRL+C")
+
