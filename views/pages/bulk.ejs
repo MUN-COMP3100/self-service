@@ -14,11 +14,35 @@
       
       <div class=" px-5 mt-5">
         <section>
-          
+          <form id="inputs">
+            <label for="">Input the CRN of all Courses</label>
+
+            <div id="success" class=" text-center border-green-600 text-green-800 p-2 border-[1px] rounded-xl hidden
+            ">
+              Registered for all Courses Successfully
+            </div>
+            <div id="error" class=" text-center border-red-600 text-red-800 p-2 border-[1px] rounded-xl hidden
+            ">
+              Failed to register to courses
+            </div>
+
+            <div class=" grid grid-flow-row grid-cols-3 gap-2">
+              <input class="p-1 rounded-md" type="text">
+              <input class="p-1 rounded-md" type="text">
+              <input class="p-1 rounded-md" type="text">
+              <input class="p-1 rounded-md" type="text">
+              <input class="p-1 rounded-md" type="text">
+              <input class="p-1 rounded-md" type="text">
+            </div>
+            <button class=" bg-red-900 text-white p-2 rounded-md mt-3"> Submit </button>
+          </form>
+        </section>
       </div>
     </main>
   </div>
   
+ 
   <%- include('../partials/scripts.ejs') %>
+  <script src="/js/bulk.js"></script>
 </body>
 </html>

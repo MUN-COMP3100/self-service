@@ -73,4 +73,9 @@ const showMessage = (success, message) => {
     failedMessage.classList.remove('hidden')
   }
 
+  setTimeout(() => {
+    successMessage.classList.add("hidden")
+    failedMessage.classList.add("hidden")
+  }, 3000);
+
 }

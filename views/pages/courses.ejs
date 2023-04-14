@@ -10,9 +10,24 @@
 		sortedOptions = [...optionsSet].sort() %>
 		<div class="flex min-h-screen">
 			<%- include('../partials/sidebar.ejs', { page_name: "courses" }) %>
-
+      
 			<main class="flex flex-col bg-slate-100 flex-1">
 				<%- include('../partials/navbar.ejs') %>
+
+        <div class="mt-3 fixed flex justify-center w-full top-[50px] right-0">
+						<div
+							id="success"
+							class=" text-center border-[1px] border-green-600 bg-white text-green-800 p-2 rounded-xl w-[500px] hidden"
+						>
+							Course Registered Successfully
+						</div>
+						<div
+							id="fail"
+							class="text-center border-[1px] border-red-600 text-red-800 p-2 rounded-xl hidden bg-white w-[500px]"
+						>
+							Failed to Register Course
+						</div>
+					</div>
 
 				<div class="px-5 mt-5">
 					<h1 class="text-xl">Courses</h1>
@@ -30,26 +45,13 @@
 						</select>
 					</div>
 
-					<div class="mt-3">
-						<div
-							id="success"
-							class="text-center border-[1px] border-green-600 text-green-800 p-2 rounded-xl hidden"
-						>
-							Course Registered Successfully
-						</div>
-						<div
-							id="fail"
-							class="text-center border-[1px] border-red-600 text-red-800 p-2 rounded-xl hidden"
-						>
-							Failed to Register Course
-						</div>
-					</div>
+					
 
 					<ul id="courses" class="flex flex-col gap-3 mt-3">
 						<% courses.forEach(course => { %>
 						<div
 							id="modal-<%= course.id %>"
-							class="fixed w-[600px] h-[500px] bg-slate-50 hidden shadow-2xl"
+							class="fixed w-[600px] h-[500px] bg-slate-50 hidden shadow-2xl schedule-modal"
 						>
 							<div
 								class="bg-white h-12 flex items-center justify-between px-2"

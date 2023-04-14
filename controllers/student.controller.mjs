@@ -144,15 +144,26 @@ export const bulk = async (req, res, next) => {
   try {
     const student = await Student.findOne({ _id: req.session.userId })
     if (!student) return next(new AppError(404, "Student does not exist"))
-    crn_list = req.body.crn_list
+
+    const crn_list = req.body.crn_list
+
+    if (!crn_list) return next(new AppError(400, "Please include crn_list"))
+
     for (const crn of crn_list) {
       const course = await Course.findOne({ crn })
-      if (!course) return next(new AppError(404, "Course not found"))
+      if (!course) return next(new AppError(404, `Course with CRN ${crn} not found`))
+      for(let registered of student.courses) {
+        const secondCourse = await Course.findOne({ _id: registered })
+        if (conflictsWith(secondCourse, course)) {
+          return next(new AppError(409, `Course ${course.subject}${course.number} with CRN ${course.crn} conflicts with ${secondCourse.subject}${secondCourse.number} with CRN ${secondCourse.crn}`))
+        }
+      }
       student.courses.push(course.id)
     }
     const savedStudent = await student.save()
     res.status(200).send(savedStudent)
   } catch (error) {
+    console.log(error)
     next(new AppError(500, error))
   }
 }
