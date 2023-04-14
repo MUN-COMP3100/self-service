@@ -101,7 +101,7 @@ export const register = async (req, res, next) => {
     })
     if (!course) return next(new AppError(404, "Course not found"))
     for (const registered of student.courses) {
-      const secondCourse = await Course.findOne({ _id: registered })
+      const secondCourse = await Course.findById(registered)
       const hasConflict = conflictsWith(course, secondCourse)
       
       if (hasConflict) {
@@ -117,6 +117,7 @@ export const register = async (req, res, next) => {
     const savedStudent = await student.save()
     res.status(200).send(savedStudent)
   } catch (error) {
+    console.log(error)
     next(new AppError(500, error))
   }
 }
