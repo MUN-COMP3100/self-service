@@ -1,4 +1,5 @@
 import { Router } from "express"
+import Course from "../models/course.model.mjs";
 
 const router = Router()
 
@@ -20,24 +21,18 @@ router.get('/', authMiddleware, (req, res) => {
   res.render('pages/index')
 })
 
-router.get('/register_courses', authMiddleware, (req, res) => {
-  res.render('pages/register_courses')
+router.get('/courses', async (req, res, next) => {
+  try {
+    let courses = await Course.find({}).sort({subject:1})
+
+    res.render('pages/courses', { courses })
+  } catch (error) {
+    next(new AppError(500, error))
+  }
 })
 
 router.get('/bulk', authMiddleware, (req, res) => {
   res.render('pages/bulk')
-})
-
-router.get('/favorite', authMiddleware, (req, res) => {
-  res.render('pages/favorite')
-})
-
-router.get('/timetable', authMiddleware, (req, res) => {
-  res.render('pages/timetable')
-})
-
-router.get('/calculator', authMiddleware, (req, res) => {
-  res.render('pages/calculator')
 })
 
 
@@ -48,8 +43,8 @@ import auth from "./auth.route.mjs"
 import favorite from "./favorite.route.mjs"
 import path, { dirname } from "path"
 
-// * All Routes Goes Here
-router.use("/courses", course)
+// * API Routes
+router.use("/api/course", course)
 router.use("/api/student", student)
 router.use("/api/auth", auth)
 router.use("/api/favorite", favorite)

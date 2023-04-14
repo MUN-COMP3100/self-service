@@ -1,5 +1,4 @@
 
-
 // * Stats
 const courseCount = document.getElementById("courseCount")
 const favoriteCount = document.getElementById("favoriteCount")

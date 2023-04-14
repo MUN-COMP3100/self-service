@@ -2,7 +2,7 @@ import axios from 'axios'
 import assert from 'assert'
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000/',
+  baseURL: 'http://localhost:3000/api',
   withCredentials: true,
   headers: {
     'Accept': 'application/json',

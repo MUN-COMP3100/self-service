@@ -6,7 +6,7 @@ export const getAll = async (req, res, next) => {
   try {
     let courses = await Course.find({}).sort({subject:1})
 
-    res.render('pages/courses', { courses })
+    res.status(200).send(courses)
   } catch (error) {
     next(new AppError(500, error))
   }

@@ -5,7 +5,7 @@ import { ObjectId } from "mongodb"
 
 const create = axios.create
 
-var url = `http://localhost:3000`
+var url = `http://localhost:3000/api`
 
 const instance = create({
   baseURL: url,
