@@ -1,40 +1,47 @@
-
 // * Stats
 const courseCount = document.getElementById("courseCount")
 const favoriteCount = document.getElementById("favoriteCount")
 const registeredCourses = document.getElementById("courses")
 const favoriteCourses = document.getElementById("favorite")
 
-const successMessage = document.getElementById('success')
-const failedMessage = document.getElementById('fail')
+const successMessage = document.getElementById("success")
+const failedMessage = document.getElementById("fail")
 
-axios.get('/api/auth/me').then(res => {
+axios.get("/api/auth/me").then((res) => {
   const data = res.data
 
-  courseCount.innerHTML = data.courses.length + " Courses"
-  favoriteCount.innerHTML = data.favorites.length + " Courses"
+  courseCount.innerHTML =
+    data.courses.length + (data.courses.length === 1 ? " Course" : " Courses")
+  favoriteCount.innerHTML =
+    data.favorites.length +
+    (data.favorites.length === 1 ? " Course" : " Courses")
 
   data.courses.forEach((course, i) => {
-    registeredCourses.innerHTML = registeredCourses.innerHTML + courseHTML(course, "reg", "deleteBtn")
+    registeredCourses.innerHTML =
+      registeredCourses.innerHTML + courseHTML(course, "reg", "deleteBtn")
   })
 
   data.favorites.forEach((course, i) => {
-    favoriteCourses.innerHTML = favoriteCourses.innerHTML + courseHTML(course, "fav", "unfavBtn")
+    favoriteCourses.innerHTML =
+      favoriteCourses.innerHTML + courseHTML(course, "fav", "unfavBtn")
   })
 })
 
 // * Delete Course
 registeredCourses.addEventListener("click", async (e) => {
-  const isDeleteBtn = e.target.nodeName === "BUTTON" && e.target.classList.contains('deleteBtn')
+  const isDeleteBtn =
+    e.target.nodeName === "BUTTON" && e.target.classList.contains("deleteBtn")
   if (isDeleteBtn) {
-    const id = e.target.dataset.course;
+    const id = e.target.dataset.course
     const courseContainer = document.getElementById(`reg-${id}`)
 
     try {
       await axios.delete(`/api/student/course/${id}`)
 
       registeredCourses.removeChild(courseContainer)
-      courseCount.innerHTML = registeredCourses.children.length + " Courses"
+      courseCount.innerHTML =
+        registeredCourses.children.length +
+        (registeredCourses.children.length === 1 ? " Course" : " Courses")
 
       showMessage(true, "Dropped Course Successfully")
     } catch (error) {
@@ -44,15 +51,18 @@ registeredCourses.addEventListener("click", async (e) => {
 })
 
 favoriteCourses.addEventListener("click", async (e) => {
-  const isUnFavBtn = e.target.nodeName === "BUTTON" && e.target.classList.contains('unfavBtn')
+  const isUnFavBtn =
+    e.target.nodeName === "BUTTON" && e.target.classList.contains("unfavBtn")
   if (isUnFavBtn) {
-    const id = e.target.dataset.course;
+    const id = e.target.dataset.course
     const courseContainer = document.getElementById(`fav-${id}`)
     try {
       await axios.delete(`/api/favorite/${id}`)
 
       favoriteCourses.removeChild(courseContainer)
-      favoriteCount.innerHTML = favoriteCourses.children.length + " Courses"
+      favoriteCount.innerHTML =
+        favoriteCourses.children.length +
+        (favoriteCourses.children.length === 1 ? " Course" : " Courses")
 
       showMessage(true, "Removed from favorites successfully")
     } catch (error) {
@@ -62,24 +72,20 @@ favoriteCourses.addEventListener("click", async (e) => {
   }
 })
 
-
-
 const showMessage = (success, message) => {
   if (success) {
-    failedMessage.classList.add('hidden')
+    failedMessage.classList.add("hidden")
     successMessage.innerHTML = message
-    successMessage.classList.remove('hidden')
+    successMessage.classList.remove("hidden")
   } else {
-    successMessage.classList.add('hidden')
+    successMessage.classList.add("hidden")
     failedMessage.innerHTML = message
-    failedMessage.classList.remove('hidden')
+    failedMessage.classList.remove("hidden")
   }
-
 }
 
-
 const courseHTML = (course, type, btnName) => {
-  return (`
+  return `
   <li
             class="h-20 bg-white p-3 rounded-xl flex justify-between items-center"
             data-subject="${course.subject}"
@@ -107,10 +113,10 @@ const courseHTML = (course, type, btnName) => {
               </div>
               <button
                 data-course="${course._id}"
-                class="bg-red-500 text-white p-1 text-sm rounded-lg ${btnName}"
+                class="${btnName}"
               >
                 Remove
               </button>
             </div>
-          </li>`)
+          </li>`
 }
