@@ -113,7 +113,7 @@ const courseHTML = (course, type, btnName) => {
               </div>
               <button
                 data-course="${course._id}"
-                class="${btnName}"
+                class="removeBtn text-white p-1 text-sm rounded-lg ${btnName}"
               >
                 Remove
               </button>

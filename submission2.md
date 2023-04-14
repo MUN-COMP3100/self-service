@@ -66,13 +66,22 @@ npm run start
 node app.js
 ```
 
-## Testing Instructions
+## Testing Instructions for Backend
 - We are testing the CRUD operation for courses
 - Testing for students and auth are together because they are relevant
-- We tested if login is successful by logging in and then calling a protected route `/auth/me` which return logged on user data
+- We tested if login is successful by logging in and then calling a protected route `/api/auth/me` which return logged on user data
 - we are testing creating new account with a random username
 - then create it again with same username to expect a unique error
 - to run the test run
 ```bash
 npm run test
 ```
+
+## Testing Instruction for Frontend
+- Basically open the website in http://localhost:3000
+- You should be redirected to /login page since all routes are protected
+- Create a user in /register page then login with the account you created
+
+# Attribution
+- Ripudaman Singh's Code from Assignment one was used to check for conflicts and parsing the data.
+- Mohammed Balfaqih's code from other projects for directory structure and error handlers

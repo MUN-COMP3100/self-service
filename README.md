@@ -3,11 +3,11 @@
 -   Mohammed Balfaqih 202051926
 -   Ripudaman Singh 202054565
 
-Submission: Saturday, 13 March, 2023
+Submission: Saturday, 14 April, 2023
 
 # Submission 3:
 
-We implemented 7 core frontend/client side features. We made 5 pages to contain all of the features.
+We implemented 8 core frontend/client side features. We made 5 pages to contain all of the features.
 
 # Features:
 
@@ -31,6 +31,7 @@ We implemented 7 core frontend/client side features. We made 5 pages to contain 
     - Login page is also route protected, only not logged in users can see them
     - Login will add a cookie with session id
     - before every api call we have access to the user who did the call using middlewares
+    - In client side you can click on the logout buton top right corner
 6. Register User
     - Students can register their user to selfservice
     - Usernames are unique so if they choose one already taken it will give them an error message
@@ -59,44 +60,64 @@ We implemented 7 core frontend/client side features. We made 5 pages to contain 
   - Tailwindcss: Instead of having premade components like Boostrap, we decided to go for this one because it gives css utilities to make the design looks the way we want.
   - Javascript: We went with vanilla javascript instead of Jquery.
 
+
 # Setup Instructions
 
--   We are using `localhost:3000` as local URL
--   To setup, after you clone run this to install all dependencies
-
+- We are using `localhost:3000` as local URL
+- To setup, after you clone run this to install all dependencies
 ```bash
 npm install
 ```
-
--   We used 127.0.0.1:27017 for host and port of database
--   selfservce for database
--   so connection URI is setup as
-
+- We used 127.0.0.1:27017 for host and port of database 
+- selfservce for database
+- so connection URI is setup as
 ```
 mongodb://127.0.0.1:27017/selfservice
 ```
 
--   After installing dependencies, you will need to seed database with courses data
--   To do that run `npm run seed`
--   You will have exit manually using `CTRL + C`, we are having trouble making it exist by itself, but it should populate database
--   This will put all courses data in selfservice database in `Course` collection
--   To run
+## Seeding Courses ( Important )
+- After installing dependencies, you will need to seed database with courses data
+- To do that run 
+```
+npm run seed
+```
+- This will put all courses data in selfservice database in `Course` collection
 
+## Seeding a Default User ( Optional )
+- If you want a default user to be made for testing run 
+```
+npm run seed:users
+```
+- username: user
+- password: user123
+- That can be changed in `/seeders/user.seed.mjs`
+
+## Running The App
+- After making sure that you installed dependencies and seeded database with data run the following command:
 ```bash
 npm run start
 #or
 node app.mjs
 ```
 
-## Testing Instructions
+# Testing
 
--   We are testing the CRUD operation for courses
--   Testing for students and auth are together because they are relevant
--   We tested if login is successful by logging in and then calling a protected route `/auth/me` which return logged on user data
--   we are testing creating new account with a random username
--   then create it again with same username to expect a unique error
--   to run the tests:
-
+## Testing Instructions for Backend
+- We are testing the CRUD operation for courses
+- Testing for students and auth are together because they are relevant
+- We tested if login is successful by logging in and then calling a protected route `/api/auth/me` which return logged on user data
+- we are testing creating new account with a random username
+- then create it again with same username to expect a unique error
+- to run the test run
 ```bash
 npm run test
 ```
+
+## Testing Instruction for Frontend
+- Basically open the website in http://localhost:3000
+- You should be redirected to /login page since all routes are protected
+- Create a user in /register page then login with the account you created
+
+# Attributions
+- Ripudaman Singh's Code from Assignment one was used to check for conflicts and parsing the data.
+- Mohammed Balfaqih's code from other projects for directory structure and error handlers

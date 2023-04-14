@@ -1,22 +1,32 @@
 import fs from "fs"
 import Course from "../models/course.model.mjs"
-import mongoose from "mongoose"
-import db from '../db/index.mjs'
 
 const file = fs.readFileSync("./seeders/courses.json", "utf-8")
 const data = await JSON.parse(file)
 
-data.forEach((course) => {
-  const newCourse = new Course({
-    subject: course.subject,
-    number: parseInt(course.number),
-    name: course.name,
-    section: parseInt(course.section),
-    crn: parseInt(course.crn),
-    slot: course.slot,
-    schedule: course.schedule,
+const seed = async () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      for (const course of data) {
+        const newCourse = new Course({
+          subject: course.subject,
+          number: parseInt(course.number),
+          name: course.name,
+          section: parseInt(course.section),
+          crn: parseInt(course.crn),
+          slot: course.slot,
+          schedule: course.schedule,
+        })
+
+        await newCourse.save()
+      }
+      resolve()
+    } catch (error) {
+      reject(error)
+    }
   })
+}
 
-  newCourse.save()
+seed().finally(async () => {
+  Course.db.close()
 })
-

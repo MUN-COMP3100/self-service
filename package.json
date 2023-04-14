@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon app.mjs",
     "seed": "node ./seeders/courses.seed.mjs",
+    "seed:users": "node ./seeders/user.seed.mjs",
     "test": "mocha",
     "start": "node app.js",
     "tailwind:css": "postcss public/css/tailwind.css -o public/css/style.css"
